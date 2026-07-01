@@ -1,59 +1,51 @@
-# Travel10
+# TravelMate
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.5.
+TravelMate is a mobile application for travel planning and expense tracking, developed with Ionic Framework and Angular.
 
-## Development server
+## Project Description
 
-To start a local development server, run:
+The application allows users to create trips and organize each trip through travel events. A travel event can represent accommodation, transport, sightseeing, a restaurant, a theatre visit, an excursion, or any other planned part of the trip.
 
-```bash
-ng serve
-```
+For each travel event, the user can enter basic information and add simple cost items. This allows the user to plan a trip and track the total amount spent for each event and for the whole trip.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+The application uses Firebase Realtime Database for data storage. Communication between the mobile application and the database is implemented through REST API calls.
 
-## Code scaffolding
+## Technologies
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Ionic Framework
+- Angular
+- TypeScript
+- Firebase Realtime Database
+- REST API
+- HTML
+- SCSS
 
-```bash
-ng generate component component-name
-```
+## Main Features
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- Display all trips
+- Add a new trip
+- Display trip details
+- Edit an existing trip
+- Delete a trip
+- Add travel events within a trip
+- Display events for a selected trip
+- Edit and delete travel events
+- Add cost items within a travel event
+- Display total cost per event
+- Display total cost per trip
+- Compare planned budget with total expenses
 
-```bash
-ng generate --help
-```
+## Data Model
 
-## Building
+### Trip
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```ts
+export interface Trip {
+  id?: string;
+  title: string;
+  destination: string;
+  startDate: string;
+  endDate: string;
+  budget?: number;
+  description?: string;
+}
