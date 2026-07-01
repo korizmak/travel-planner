@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ isEditMode ? 'Edit Trip' : 'New Trip' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="tripForm">
+    <ion-item>
+      <ion-label position="floating">Title *</ion-label>
+      <ion-input type="text" formControlName="title"></ion-input>
+    </ion-item>
+    @if (title?.invalid && (title?.dirty || title?.touched)) {
+      <div style="color: var(--ion-color-danger); padding: 0 1rem; font-size: 0.8rem;">
+        Title is required
+      </div>
+    }
+
+    <ion-item>
+      <ion-label position="floating">Destination *</ion-label>
+      <ion-input type="text" formControlName="destination"></ion-input>
+    </ion-item>
+    @if (destination?.invalid && (destination?.dirty || destination?.touched)) {
+      <div style="color: var(--ion-color-danger); padding: 0 1rem; font-size: 0.8rem;">
+        Destination is required
+      </div>
+    }
+
+    <ion-item>
+      <ion-label position="floating">Start Date *</ion-label>
+      <ion-input type="date" formControlName="startDate"></ion-input>
+    </ion-item>
+    @if (startDate?.invalid && (startDate?.dirty || startDate?.touched)) {
+      <div style="color: var(--ion-color-danger); padding: 0 1rem; font-size: 0.8rem;">
+        Start date is required
+      </div>
+    }
+
+    <ion-item>
+      <ion-label position="floating">End Date *</ion-label>
+      <ion-input type="date" formControlName="endDate"></ion-input>
+    </ion-item>
+    @if (endDate?.invalid && (endDate?.dirty || endDate?.touched)) {
+      <div style="color: var(--ion-color-danger); padding: 0 1rem; font-size: 0.8rem;">
+        End date is required
+      </div>
+    }
+
+    <ion-item>
+      <ion-label position="floating">Budget</ion-label>
+      <ion-input type="number" formControlName="budget"></ion-input>
+    </ion-item>
+    @if (budget?.invalid && (budget?.dirty || budget?.touched)) {
+      <div style="color: var(--ion-color-danger); padding: 0 1rem; font-size: 0.8rem;">
+        Budget must be a positive number
+      </div>
+    }
+
+    <ion-item>
+      <ion-label position="floating">Description</ion-label>
+      <ion-textarea formControlName="description" rows="4"></ion-textarea>
+    </ion-item>
+
+    <div style="padding: 1rem;">
+      <ion-button expand="block" (click)="saveTrip()" [disabled]="tripForm.invalid">
+        {{ isEditMode ? 'Save Changes' : 'Create Trip' }}
+      </ion-button>
+      <ion-button expand="block" fill="outline" (click)="cancel()" style="margin-top: 0.5rem;">
+        Cancel
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

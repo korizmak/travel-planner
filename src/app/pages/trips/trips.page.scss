@@ -1,0 +1,13 @@
+ion-card {
+  margin: 1rem;
+  cursor: pointer;
+}
+
+ion-card:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
+}
+
+ion-card-content p {
+  margin: 0.5rem 0;
+}
