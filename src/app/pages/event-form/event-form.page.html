@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ isEditMode ? 'Edit Event' : 'New Event' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="eventForm">
+    <ion-item>
+      <ion-label position="floating">Title *</ion-label>
+      <ion-input type="text" formControlName="title"></ion-input>
+    </ion-item>
+    @if (title?.invalid && (title?.dirty || title?.touched)) {
+      <div style="color: var(--ion-color-danger); padding: 0 1rem; font-size: 0.8rem;">
+        Title is required
+      </div>
+    }
+
+    <ion-item>
+      <ion-label position="floating">Type *</ion-label>
+      <ion-select formControlName="type">
+        @for (typeKey of getEventTypeKeys(); track typeKey) {
+          <ion-select-option [value]="typeKey">{{ getEventTypeLabel(typeKey) }}</ion-select-option>
+        }
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Date</ion-label>
+      <ion-input type="date" formControlName="date"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Time</ion-label>
+      <ion-input type="time" formControlName="time"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Notes</ion-label>
+      <ion-textarea formControlName="notes" rows="3"></ion-textarea>
+    </ion-item>
+
+    <div style="padding: 1rem;">
+      <h3>Costs</h3>
+      <div formArrayName="costs">
+        @for (costGroup of costsArray.controls; track costGroup; let i = $index) {
+          <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem; align-items: center;">
+            <ion-item style="flex: 2;">
+              <ion-label position="floating">Title *</ion-label>
+              <ion-input type="text" [formControlName]="i + '.title'"></ion-input>
+            </ion-item>
+            <ion-item style="flex: 1;">
+              <ion-label position="floating">Amount *</ion-label>
+              <ion-input type="number" [formControlName]="i + '.amount'"></ion-input>
+            </ion-item>
+            <ion-button color="danger" (click)="removeCostItem(i)">
+              Remove
+            </ion-button>
+          </div>
+        }
+      </div>
+      <ion-button expand="block" fill="outline" (click)="addCostItem()" style="margin-top: 0.5rem;">
+        Add Cost
+      </ion-button>
+    </div>
+
+    <div style="padding: 1rem;">
+      <ion-button expand="block" (click)="saveEvent()" [disabled]="eventForm.invalid">
+        {{ isEditMode ? 'Save Changes' : 'Create Event' }}
+      </ion-button>
+      <ion-button expand="block" fill="outline" (click)="cancel()" style="margin-top: 0.5rem;">
+        Cancel
+      </ion-button>
+    </div>
+  </form>
+</ion-content>
