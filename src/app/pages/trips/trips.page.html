@@ -16,7 +16,7 @@
           <ion-card-subtitle>{{ trip.destination }}</ion-card-subtitle>
           <ion-card-title>{{ trip.title }}</ion-card-title>
         </ion-card-header>
-        <ionCardContent>
+        <ion-card-content>
           <p>
             <strong>Dates:</strong> {{ formatDate(trip.startDate) }} - {{ formatDate(trip.endDate) }}
           </p>
@@ -28,14 +28,12 @@
           <p>
             <strong>Spent:</strong> {{ formatAmount(getTotalSpent(trip.id!)) }}
           </p>
-        </ionCardContent>
+        </ion-card-content>
       </ion-card>
     }
   }
 
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button (click)="addTrip()">
-      <ion-icon [icon]="add"></ion-icon>
-    </ion-fab-button>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="add-trip-fab">
+    <ion-fab-button (click)="addTrip()">+</ion-fab-button>
   </ion-fab>
 </ion-content>

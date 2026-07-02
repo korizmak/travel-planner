@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonButton, IonFab, IonFabButton, IonIcon, IonLabel } from '@ionic/angular/standalone';
-import { add } from 'ionicons/icons';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonFab, IonFabButton, IonLabel } from '@ionic/angular/standalone';
 import { TravelDataService } from '../../services/travel-data.service';
 import { Trip } from '../../models/trip.model';
 
@@ -22,10 +21,8 @@ import { Trip } from '../../models/trip.model';
     IonCardSubtitle,
     IonCardTitle,
     IonCardContent,
-    IonButton,
     IonFab,
     IonFabButton,
-    IonIcon,
     IonLabel
   ]
 })
