@@ -147,4 +147,8 @@ export class TripDetailsPage implements OnInit {
   formatEventType(type: string): string {
     return type.charAt(0).toUpperCase() + type.slice(1);
   }
+
+  get absoluteRemainingBudget(): number {
+    return Math.abs(this.remainingBudget);
+  }
 }

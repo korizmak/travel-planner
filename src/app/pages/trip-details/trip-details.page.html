@@ -15,7 +15,7 @@
         <ion-card-subtitle>{{ trip.destination }}</ion-card-subtitle>
         <ion-card-title>Trip Details</ion-card-title>
       </ion-card-header>
-      <ionCardContent>
+      <ion-card-content>
         <p><strong>Dates:</strong> {{ formatDate(trip.startDate) }} - {{ formatDate(trip.endDate) }}</p>
         @if (trip.description) {
           <p><strong>Description:</strong> {{ trip.description }}</p>
@@ -26,7 +26,7 @@
         <p><strong>Total Spent:</strong> {{ formatAmount(totalSpent) }}</p>
         @if (trip.budget) {
           @if (isOverBudget) {
-            <p style="color: var(--ion-color-danger);"><strong>Over Budget:</strong> {{ formatAmount(Math.abs(remainingBudget)) }}</p>
+            <p style="color: var(--ion-color-danger);"><strong>Over Budget:</strong> {{ formatAmount(absoluteRemainingBudget) }}</p>
           } @else {
             <p style="color: var(--ion-color-success);"><strong>Remaining:</strong> {{ formatAmount(remainingBudget) }}</p>
           }
