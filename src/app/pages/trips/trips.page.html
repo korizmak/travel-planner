@@ -6,25 +6,29 @@
 
 <ion-content>
   @if (trips.length === 0) {
-    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 2rem; text-align: center;">
-      <ion-label style="font-size: 1.2rem; color: #666;">No trips yet. Add your first trip.</ion-label>
+    <div class="empty-state">
+      <ion-label>No trips yet. Add your first trip.</ion-label>
     </div>
   } @else {
     @for (trip of trips; track trip.id) {
-      <ion-card (click)="openTrip(trip.id!)">
+      <ion-card class="trip-card" [routerLink]="['/trips', trip.id]">
         <ion-card-header>
           <ion-card-subtitle>{{ trip.destination }}</ion-card-subtitle>
           <ion-card-title>{{ trip.title }}</ion-card-title>
         </ion-card-header>
+
         <ion-card-content>
           <p>
-            <strong>Dates:</strong> {{ formatDate(trip.startDate) }} - {{ formatDate(trip.endDate) }}
+            <strong>Dates:</strong>
+            {{ formatDate(trip.startDate) }} - {{ formatDate(trip.endDate) }}
           </p>
+
           @if (trip.budget) {
             <p>
               <strong>Budget:</strong> {{ formatAmount(trip.budget) }}
             </p>
           }
+
           <p>
             <strong>Spent:</strong> {{ formatAmount(getTotalSpent(trip.id!)) }}
           </p>
@@ -34,6 +38,8 @@
   }
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="add-trip-fab">
-    <ion-fab-button (click)="addTrip()">+</ion-fab-button>
+    <ion-fab-button routerLink="/trips/new">
+      +
+    </ion-fab-button>
   </ion-fab>
 </ion-content>

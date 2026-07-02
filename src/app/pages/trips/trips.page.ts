@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonFab, IonFabButton, IonLabel } from '@ionic/angular/standalone';
 import { TravelDataService } from '../../services/travel-data.service';
 import { Trip } from '../../models/trip.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-trips',
@@ -23,7 +24,8 @@ import { Trip } from '../../models/trip.model';
     IonCardContent,
     IonFab,
     IonFabButton,
-    IonLabel
+    IonLabel,
+    RouterLink
   ]
 })
 export class TripsPage implements OnInit {
@@ -42,13 +44,13 @@ export class TripsPage implements OnInit {
     this.trips = this.travelDataService.getTrips();
   }
 
-  openTrip(tripId: string) {
-    this.router.navigate(['/trips', tripId]);
-  }
+  // openTrip(tripId: string) {
+  //   this.router.navigate(['/trips', tripId]);
+  // }
 
-  addTrip() {
-    this.router.navigate(['/trips/new']);
-  }
+  // addTrip() {
+  //   this.router.navigateByUrl('/trips/new');
+  // }
 
   formatDate(dateString: string): string {
     const date = new Date(dateString);
