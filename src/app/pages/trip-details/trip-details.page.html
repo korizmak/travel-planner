@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ trip?.title }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="editTrip()">Edit</ion-button>
+      <ion-button color="danger" (click)="deleteTrip()">Delete</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  @if (trip) {
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>{{ trip.destination }}</ion-card-subtitle>
+        <ion-card-title>Trip Details</ion-card-title>
+      </ion-card-header>
+      <ionCardContent>
+        <p><strong>Dates:</strong> {{ formatDate(trip.startDate) }} - {{ formatDate(trip.endDate) }}</p>
+        @if (trip.description) {
+          <p><strong>Description:</strong> {{ trip.description }}</p>
+        }
+        @if (trip.budget) {
+          <p><strong>Budget:</strong> {{ formatAmount(trip.budget) }}</p>
+        }
+        <p><strong>Total Spent:</strong> {{ formatAmount(totalSpent) }}</p>
+        @if (trip.budget) {
+          @if (isOverBudget) {
+            <p style="color: var(--ion-color-danger);"><strong>Over Budget:</strong> {{ formatAmount(Math.abs(remainingBudget)) }}</p>
+          } @else {
+            <p style="color: var(--ion-color-success);"><strong>Remaining:</strong> {{ formatAmount(remainingBudget) }}</p>
+          }
+        }
+      </ion-card-content>
+    </ion-card>
+
+    <div style="padding: 1rem;">
+      <ion-button expand="block" (click)="addEvent()">Add Event</ion-button>
+    </div>
+
+    @if (events.length === 0) {
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; text-align: center;">
+        <ion-label style="font-size: 1.2rem; color: #666;">No events yet. Add your first event.</ion-label>
+      </div>
+    } @else {
+      <ion-list>
+        @for (event of events; track event.id) {
+          <ion-item (click)="editEvent(event.id!)">
+            <ion-label>
+              <h3>{{ event.title }}</h3>
+              <p>{{ formatEventType(event.type) }}</p>
+              @if (event.date) {
+                <p>{{ formatDate(event.date) }} @if (event.time) { {{ formatTime(event.time) }} }</p>
+              }
+              <p style="color: var(--ion-color-primary);">Total: {{ formatAmount(getEventTotalCost(event)) }}</p>
+            </ion-label>
+            <ion-button slot="end" color="danger" (click)="deleteEvent(event.id!); $event.stopPropagation()">
+              Delete
+            </ion-button>
+          </ion-item>
+        }
+      </ion-list>
+    }
+  }
+</ion-content>
